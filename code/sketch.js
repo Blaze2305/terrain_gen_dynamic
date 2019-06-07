@@ -5,7 +5,7 @@ let start=10;
 let w=1000;
 let h=2000;
 let freezing=0;
-let button1,button2,button3,button4;
+let button1,button2,button3,button4,button5,button6,button7;
 let heights=[];
 let switcher=0;
 let colors=0;
@@ -14,24 +14,42 @@ let mountain_height=200;
 let sea_depth=-300;
 let spheres=0;
 let sp_frame=0;
+let rotation=0;
 let x,y,z;
 
 function setup(){
   createCanvas(1000,1000,WEBGL);
   cols=floor(w/size);
   rows=floor(h/size);
+
+  //sliders
+  x=createSlider(-360,360,0,1);
+  y=createSlider(-360,360,0,1);
+  z=createSlider(-360,360,0,1);
+
+  //buttons
   button1=createButton("Press to freeze")
   button1.mousePressed(freeze);
+  button1.position(1000,962.962);
   button2=createButton("Press to switch mode")
   button2.mousePressed(change);
+  button2.position(1000,912.962);
   button3=createButton("Press to reduce to frame only")
   button3.mousePressed(grid);
+  button3.position(1000,862.962);
   button4=createButton("Press to remove lines")
   button4.mousePressed(line_rem);
+  button4.position(1000,937.962);
   button5=createButton("Press to remove sphere")
   button5.mousePressed(sphere_rem);
+  button5.position(1000,887.962);
   button6=createButton("Press to reduce sphere to frame")
   button6.mousePressed(sphere_frame);
+  button6.position(1000,837.962);
+  button7=createButton("Rotation Lock")
+  button7.mousePressed(rotation_lock);
+  button7.position(1000,750);
+  button7.size(80,80);
 }
 
 
@@ -41,8 +59,13 @@ function draw(){
   let yoff=start;
   background(0);
 
+  if(rotation==1){
+    rotateX((PI/180)*x.value());
+    rotateY((PI/180)*y.value());
+    rotateZ((PI/180)*z.value());
+  }
+
   if(switcher==0){
-    //((i>2*cols/3 && i<w) || (i>0&&w<cols/3))
     if(freezing==0){
       for(i=0;i<=cols+1;i++){
         heights[i]=[]
@@ -131,7 +154,7 @@ function draw(){
     rotateX(PI/2.3);
     translate(-w/2,-h/2)
 
-    if(spheres==0){
+    if(spheres==1){
       push();
       if(sp_frame==0){
         noStroke()
@@ -209,5 +232,17 @@ function sphere_frame(){
   }
   else{
     sp_frame=0;
+  }
+}
+
+function rotation_lock(){
+  if(rotation==0){
+    rotation=1;
+  }
+  else{
+    rotation=0;
+    x.value(0);
+    y.value(0);
+    z.value(0);
   }
 }
