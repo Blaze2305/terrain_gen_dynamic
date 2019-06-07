@@ -23,9 +23,9 @@ function setup(){
   rows=floor(h/size);
 
   //sliders
-  x=createSlider(-360,360,0,1);
-  y=createSlider(-360,360,0,1);
-  z=createSlider(-360,360,0,1);
+  x=createSlider(-180,180,0,1);
+  y=createSlider(-180,180,0,1);
+  z=createSlider(-180,180,0,1);
 
   //buttons
   button1=createButton("Press to freeze")
