@@ -14,6 +14,7 @@ let mountain_height=200;
 let sea_depth=-300;
 let spheres=0;
 let sp_frame=0;
+let x,y,z;
 
 function setup(){
   createCanvas(1000,1000,WEBGL);
@@ -41,13 +42,13 @@ function draw(){
   background(0);
 
   if(switcher==0){
-
+    //((i>2*cols/3 && i<w) || (i>0&&w<cols/3))
     if(freezing==0){
       for(i=0;i<=cols+1;i++){
         heights[i]=[]
         for(j=0;j<rows;j++){
-          if(i>cols/2){
-            heights[i][j]=map(noise(xoff,yoff),0,1,sea_depth,mountain_height);
+          if(i<cols/3.5 || i>cols/2){
+            heights[i][j]=map(noise(xoff,yoff),0,1,sea_depth+100,mountain_height+100);
           }
           else{
             heights[i][j]=0
